@@ -1,4 +1,4 @@
-name: Mirror to Bitbucket Repo
+name: Mirror to github pages
 
 on: [ push, delete, create ]
 
