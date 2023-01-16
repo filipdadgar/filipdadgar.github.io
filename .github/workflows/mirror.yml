@@ -15,6 +15,6 @@ jobs:
           source_repo: "https://github.com/filipdadgar/Dadgar.domain.git"
           source_user: "${{ secrets.MIRROR_SOURCE_USER_GITHUB }}"
           source_token: "${{ secrets.MIRROR_SOURCE_TOKEN_GITHUB }}"
-          target_repo: "${{ secrets.MIRROR_TARGET_URL_GITHUB }}"
+          target_repo: "https://github.com/filipdadgar/filipdadgar.github.io.git"
           target_user: "${{ secrets.MIRROR_TARGET_USER_GITHUB }}"
           target_token: "${{ secrets.MIRROR_TARGET_TOKEN_GITHUB }}"
