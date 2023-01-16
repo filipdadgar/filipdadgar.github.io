@@ -1,20 +1,19 @@
-name: "Repository Mirror: GitHub"
+name: Mirror to Bitbucket Repo
 
-on:
-  schedule:
-    - cron:  "*/5 * * * *"
-  workflow_dispatch:
+on: [ push, delete, create ]
+
+# Ensures that only one mirror task will run at a time.
+concurrency:
+  group: git-mirror
 
 jobs:
-  mirror:
+  git-mirror:
     runs-on: ubuntu-latest
-    name: "Mirror"
     steps:
-      - uses: pkgstore/github-action-mirror@main
+      - uses: wearerequired/git-mirror-action@v1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         with:
-          source_repo: "https://github.com/filipdadgar/Dadgar.domain.git"
-          source_user: "${{ secrets.MIRROR_SOURCE_USER_GITHUB }}"
-          source_token: "${{ secrets.MIRROR_SOURCE_TOKEN_GITHUB }}"
-          target_repo: "github.com/filipdadgar/filipdadgar.github.io.git"
-          target_user: "${{ secrets.MIRROR_TARGET_USER_GITHUB }}"
-          target_token: "${{ secrets.MIRROR_TARGET_TOKEN_GITHUB }}"
+          source-repo: "git@github.com:filipdadgar/Dadgar.domain.git"
+          destination-repo: "git@github.com:filipdadgar.github.io.git"
